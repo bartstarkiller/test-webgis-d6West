@@ -757,7 +757,7 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_Planets_2rule0_eval_expression(context) {
+function exp_Planets_4rule0_eval_expression(context) {
     // canon = 1
 
     var feature = context.feature;
@@ -770,7 +770,7 @@ function exp_Planets_2rule0_eval_expression(context) {
 }
 
 
-function exp_Planets_2rule1_eval_expression(context) {
+function exp_Planets_4rule1_eval_expression(context) {
     // canon = 0
 
     var feature = context.feature;
