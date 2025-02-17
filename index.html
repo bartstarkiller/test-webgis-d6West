@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -34,12 +35,10 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
         <script src="data/GalacticRegions_0.js"></script>
-        <script src="data/ColonizationRegions_1.js"></script>
-        <script src="data/Sectors_2.js"></script>
-        <script src="data/HyperspaceRoutes_3.js"></script>
-        <script src="data/Planets_4.js"></script>
-        <script src="data/NavigationalGrid_5.js"></script>
+        <script src="data/HyperspaceRoutes_1.js"></script>
+        <script src="data/Planets_2.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -164,139 +163,7 @@
         });
         bounds_group.addLayer(layer_GalacticRegions_0);
         map.addLayer(layer_GalacticRegions_0);
-        function pop_ColonizationRegions_1(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_ColonizationRegions_1_0() {
-            return {
-                pane: 'pane_ColonizationRegions_1',
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        function style_ColonizationRegions_1_1() {
-            return {
-                pane: 'pane_ColonizationRegions_1',
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,0.25098039215686274)',
-                interactive: false,
-            }
-        }
-        map.createPane('pane_ColonizationRegions_1');
-        map.getPane('pane_ColonizationRegions_1').style.zIndex = 401;
-        map.getPane('pane_ColonizationRegions_1').style['mix-blend-mode'] = 'normal';
-        var layer_ColonizationRegions_1 = new L.geoJson.multiStyle(json_ColonizationRegions_1, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_ColonizationRegions_1',
-            layerName: 'layer_ColonizationRegions_1',
-            pane: 'pane_ColonizationRegions_1',
-            onEachFeature: pop_ColonizationRegions_1,
-            styles: [style_ColonizationRegions_1_0,style_ColonizationRegions_1_1,]
-        });
-        bounds_group.addLayer(layer_ColonizationRegions_1);
-        function pop_Sectors_2(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['cartodb_id'] !== null ? autolinker.link(String(feature.properties['cartodb_id']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['objectid_1'] !== null ? autolinker.link(String(feature.properties['objectid_1']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['objectid'] !== null ? autolinker.link(String(feature.properties['objectid']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['sector'] !== null ? autolinker.link(String(feature.properties['sector']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="link" colspan="2"><strong>link</strong><br />' + (feature.properties['link'] !== null ? autolinker.link(String(feature.properties['link']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['shape_leng'] !== null ? autolinker.link(String(feature.properties['shape_leng']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? autolinker.link(String(feature.properties['shape_area']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Sectors_2_0() {
-            return {
-                pane: 'pane_Sectors_2',
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_Sectors_2');
-        map.getPane('pane_Sectors_2').style.zIndex = 402;
-        map.getPane('pane_Sectors_2').style['mix-blend-mode'] = 'normal';
-        var layer_Sectors_2 = new L.geoJson(json_Sectors_2, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_Sectors_2',
-            layerName: 'layer_Sectors_2',
-            pane: 'pane_Sectors_2',
-            onEachFeature: pop_Sectors_2,
-            style: style_Sectors_2_0,
-        });
-        bounds_group.addLayer(layer_Sectors_2);
-        function pop_HyperspaceRoutes_3(feature, layer) {
+        function pop_HyperspaceRoutes_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -321,9 +188,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_HyperspaceRoutes_3_0() {
+        function style_HyperspaceRoutes_1_0() {
             return {
-                pane: 'pane_HyperspaceRoutes_3',
+                pane: 'pane_HyperspaceRoutes_1',
                 opacity: 1,
                 color: 'rgba(138,255,154,1.0)',
                 dashArray: '',
@@ -334,21 +201,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_HyperspaceRoutes_3');
-        map.getPane('pane_HyperspaceRoutes_3').style.zIndex = 403;
-        map.getPane('pane_HyperspaceRoutes_3').style['mix-blend-mode'] = 'normal';
-        var layer_HyperspaceRoutes_3 = new L.geoJson(json_HyperspaceRoutes_3, {
+        map.createPane('pane_HyperspaceRoutes_1');
+        map.getPane('pane_HyperspaceRoutes_1').style.zIndex = 401;
+        map.getPane('pane_HyperspaceRoutes_1').style['mix-blend-mode'] = 'normal';
+        var layer_HyperspaceRoutes_1 = new L.geoJson(json_HyperspaceRoutes_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HyperspaceRoutes_3',
-            layerName: 'layer_HyperspaceRoutes_3',
-            pane: 'pane_HyperspaceRoutes_3',
-            onEachFeature: pop_HyperspaceRoutes_3,
-            style: style_HyperspaceRoutes_3_0,
+            dataVar: 'json_HyperspaceRoutes_1',
+            layerName: 'layer_HyperspaceRoutes_1',
+            pane: 'pane_HyperspaceRoutes_1',
+            onEachFeature: pop_HyperspaceRoutes_1,
+            style: style_HyperspaceRoutes_1_0,
         });
-        bounds_group.addLayer(layer_HyperspaceRoutes_3);
-        map.addLayer(layer_HyperspaceRoutes_3);
-        function pop_Planets_4(feature, layer) {
+        bounds_group.addLayer(layer_HyperspaceRoutes_1);
+        map.addLayer(layer_HyperspaceRoutes_1);
+        function pop_Planets_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -372,15 +239,15 @@
 			});
 			layer.bindPopup(content, { maxHeight: 400 });
         }
-        function style_Planets_4_0(feature) {
+        function style_Planets_2_0(feature) {
             var context = {
                 feature: feature,
                 variables: {}
             };
             // Start of if blocks and style check logic
-            if (exp_Planets_4rule0_eval_expression(context)) {
+            if (exp_Planets_2rule0_eval_expression(context)) {
                   return {
-                pane: 'pane_Planets_4',
+                pane: 'pane_Planets_2',
                 radius: 1.66666,
                 opacity: 1,
                 color: 'rgba(255,255,255,0.0)',
@@ -394,9 +261,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_Planets_4rule1_eval_expression(context)) {
+                else if (exp_Planets_2rule1_eval_expression(context)) {
                   return {
-                pane: 'pane_Planets_4',
+                pane: 'pane_Planets_2',
                 radius: 1.66666,
                 opacity: 1,
                 color: 'rgba(255,255,255,0.0)',
@@ -414,92 +281,29 @@
                 return {fill: false, stroke: false};
             }
         }
-        map.createPane('pane_Planets_4');
-        map.getPane('pane_Planets_4').style.zIndex = 404;
-        map.getPane('pane_Planets_4').style['mix-blend-mode'] = 'normal';
-        var layer_Planets_4 = new L.geoJson(json_Planets_4, {
+        map.createPane('pane_Planets_2');
+        map.getPane('pane_Planets_2').style.zIndex = 402;
+        map.getPane('pane_Planets_2').style['mix-blend-mode'] = 'normal';
+        var layer_Planets_2 = new L.geoJson(json_Planets_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Planets_4',
-            layerName: 'layer_Planets_4',
-            pane: 'pane_Planets_4',
-            onEachFeature: pop_Planets_4,
+            dataVar: 'json_Planets_2',
+            layerName: 'layer_Planets_2',
+            pane: 'pane_Planets_2',
+            onEachFeature: pop_Planets_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Planets_4_0(feature));
+                return L.circleMarker(latlng, style_Planets_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Planets_4);
-        map.addLayer(layer_Planets_4);
-        function pop_NavigationalGrid_5(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['grid'] !== null ? autolinker.link(String(feature.properties['grid']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['cartodb_id'] !== null ? autolinker.link(String(feature.properties['cartodb_id']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['created_at'] !== null ? autolinker.link(String(feature.properties['created_at']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['updated_at'] !== null ? autolinker.link(String(feature.properties['updated_at']).replace(/'/g, '\'').replace(/"/g, '&quot;').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_NavigationalGrid_5_0() {
-            return {
-                pane: 'pane_NavigationalGrid_5',
-                opacity: 1,
-                color: 'rgba(196,205,212,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_NavigationalGrid_5');
-        map.getPane('pane_NavigationalGrid_5').style.zIndex = 405;
-        map.getPane('pane_NavigationalGrid_5').style['mix-blend-mode'] = 'normal';
-        var layer_NavigationalGrid_5 = new L.geoJson(json_NavigationalGrid_5, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_NavigationalGrid_5',
-            layerName: 'layer_NavigationalGrid_5',
-            pane: 'pane_NavigationalGrid_5',
-            onEachFeature: pop_NavigationalGrid_5,
-            style: style_NavigationalGrid_5_0,
-        });
-        bounds_group.addLayer(layer_NavigationalGrid_5);
+        bounds_group.addLayer(layer_Planets_2);
+        map.addLayer(layer_Planets_2);
         var overlaysTree = [
-            {label: '<img src="legend/NavigationalGrid_5.png" /> Navigational Grid', layer: layer_NavigationalGrid_5},
-            {label: 'Planets<br /><table><tr><td style="text-align: center;"><img src="legend/Planets_4_Canon0.png" /></td><td>Canon</td></tr><tr><td style="text-align: center;"><img src="legend/Planets_4_Legends1.png" /></td><td>Legends</td></tr></table>', layer: layer_Planets_4},
-            {label: '<img src="legend/HyperspaceRoutes_3.png" /> Hyperspace Routes', layer: layer_HyperspaceRoutes_3},
-            {label: '<img src="legend/Sectors_2.png" /> Sectors', layer: layer_Sectors_2},
-            {label: '<img src="legend/ColonizationRegions_1.png" /> Colonization Regions', layer: layer_ColonizationRegions_1},
+            {label: 'Planets<br /><table><tr><td style="text-align: center;"><img src="legend/Planets_2_Canon0.png" /></td><td>Canon</td></tr><tr><td style="text-align: center;"><img src="legend/Planets_2_Legends1.png" /></td><td>Legends</td></tr></table>', layer: layer_Planets_2},
+            {label: '<img src="legend/HyperspaceRoutes_1.png" /> Hyperspace Routes', layer: layer_HyperspaceRoutes_1},
             {label: '<img src="legend/GalacticRegions_0.png" /> Galactic Regions', layer: layer_GalacticRegions_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -563,27 +367,34 @@
         });       
         setBounds();
         var i = 0;
-        layer_Planets_4.eachLayer(function(layer) {
+        layer_Planets_2.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['planet'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['planet']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Planets_4'});
+            layer.bindTooltip((layer.feature.properties['planet'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['planet']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Planets_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_Planets_4]);
+        map.addControl(new L.Control.Search({
+            layer: layer_Planets_2,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'planet'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_Planets_2]);
         map.on("zoomend", function(){
-            resetLabels([layer_Planets_4]);
+            resetLabels([layer_Planets_2]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Planets_4]);
+            resetLabels([layer_Planets_2]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Planets_4]);
+            resetLabels([layer_Planets_2]);
         });
         </script>
     </body>
